@@ -1,0 +1,15 @@
+.PopupSwitcher-wrapper {
+  min-height: 50px;
+}
+.PopupSwitcher {
+  width: 35px;
+  height: 35px;
+  background-image: url(https://pomofocus.io/icons/plus-circle-white.png);
+  background-size: cover;
+  cursor: pointer;
+  transition: 0.7s;
+  margin: 5px;
+}
+.PopupSwitcher:hover {
+  transform: rotate(180deg);
+}

@@ -1,0 +1,13 @@
+@import url("./constans.css");
+@import url("./app/app.css");
+@import url("./components/item/item.css");
+@import url("./components/task/task.css");
+@import url("./components/popup/popup.css");
+@import url("./components/PopupSwitcher/PopupSwitcher.css");
+@import url("./components/incDecBtns/incDecBtns.css");
+@import url("./components/activeTask/activeTask.css");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

@@ -1,0 +1,11 @@
+:root {
+  --Item-wrapper-background: rgba(255, 255, 255, 0.1);
+  --PomodoroColor: rgb(186, 73, 73);
+  --ShortBreakColor: rgb(56, 133, 138);
+  --LongBreakBreakColor: rgb(57, 112, 151);
+  --PomodoroSelectColor: rgb(164, 78, 78);
+  --GrayColor: rgb(223, 223, 223);
+  --wrapperWidth: 480px;
+  --fontFamily: Geologica;
+  --DarkGrayColor: rgb(114, 114, 114);
+}

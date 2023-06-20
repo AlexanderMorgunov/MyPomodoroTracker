@@ -1,0 +1,82 @@
+.task-wrapper {
+  width: 100%;
+  min-height: 50px;
+  color: gray;
+  background-color: white;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--fontFamily);
+  transition: 0.3s all;
+}
+.task-wrapper-active {
+  border-left: solid 7px #a3dba3;
+}
+/* .task-wrapper-active:hover {
+  border: solid 7px #a3dba3;
+} */
+
+.task-wrapper:hover {
+  /* border: 1px rgba(0, 0, 0, 0.15); */
+  border: 2px solid var(--PomodoroSelectColor);
+  /* color: #a44e4e; */
+}
+.task-checkMark {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgb(223, 223, 223);
+  background-color: rgb(223, 223, 223);
+  margin-right: 10px;
+  border-radius: 50%;
+  transition: 0.3s all;
+}
+.task-checkMark::after {
+  content: "";
+  display: block;
+  margin-left: 5px;
+  width: 5px;
+  height: 11px;
+  border-style: solid;
+  border-color: rgb(255, 255, 255);
+  border-image: initial;
+  border-width: 0px 3px 3px 0px;
+  transform: rotate(45deg);
+}
+.task-checkMark:hover {
+  background-color: var(--PomodoroSelectColor);
+  border: 2px solid var(--PomodoroSelectColor);
+}
+.task-checkMark-done {
+  background-color: var(--PomodoroSelectColor);
+  border: 2px solid var(--PomodoroSelectColor);
+}
+.task-title {
+  width: 230px;
+}
+.gg-trash {
+  right: 20px;
+  margin-left: 10px;
+  transition: 0.5 all;
+  cursor: pointer;
+  color: var(--DarkGrayColor);
+}
+.gg-trash:hover {
+  color: var(--PomodoroSelectColor);
+}
+.gg-clipboard {
+  transition: 0.5 all;
+  cursor: pointer;
+  color: rgb(114, 114, 114);
+}
+.gg-clipboard:hover {
+  color: var(--PomodoroSelectColor);
+}
+.gg-clipboard:disabled {
+  color: rgb(195, 195, 195);
+  cursor: default;
+}

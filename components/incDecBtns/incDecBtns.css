@@ -1,0 +1,21 @@
+.Popup-countPomodoro-btnGroup {
+  width: 30px;
+  height: 35px;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--fontFamily);
+  justify-content: space-between;
+  position: relative;
+  left: 42px;
+  background-color: white;
+}
+.Popup-countPomodoro-btn {
+  background-color: white;
+  border: 1px solid var(--GrayColor);
+  cursor: pointer;
+  border-radius: 20%;
+}
+.Popup-countPomodoro-btn:hover {
+  font-weight: bold;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}

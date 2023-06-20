@@ -1,0 +1,18 @@
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.App-Pomodoro {
+  background-color: var(--PomodoroColor);
+}
+.App-ShortBreak {
+  background-color: var(--ShortBreakColor);
+}
+.App-LongBreak {
+  background-color: var(--LongBreakBreakColor);
+}

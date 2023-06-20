@@ -1,0 +1,8 @@
+.activeTask-wrapper {
+  position: relative;
+  top: 23px;
+}
+.activeTask {
+  font-family: var(--fontFamily);
+  color: white;
+}
