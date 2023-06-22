@@ -24,8 +24,6 @@ const Item = (item, callbacks) => {
     isDone = false,
   } = item;
 
-  console.log(isDone);
-
   const interval =
     activeTimer == "Pomodoro"
       ? PomodoroTimerInterval
@@ -42,7 +40,6 @@ const Item = (item, callbacks) => {
 
   if (item[`${getCurrentActiveTimer()}Timer`] === "00:00") {
     clearInterval(interval);
-    console.log(GetEditeObject());
     callbacks.onChangeTask(GetEditeObject());
   }
 

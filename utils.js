@@ -46,7 +46,6 @@ export function getTimer() {
 }
 
 export function getCurrentActiveTimer(list = store.state.list) {
-  console.log(list);
   return list.filter((el) => el.isCurrent)[0]?.activeTimer || "Pomodoro";
 }
 

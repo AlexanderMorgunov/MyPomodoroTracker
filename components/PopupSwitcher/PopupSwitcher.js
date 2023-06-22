@@ -8,8 +8,6 @@ const PopupSwitcher = (
     className: "PopupSwitcher",
     onclick: () => {
       onPauseAllTimer();
-      // let i = 0;
-      console.log(i);
       onSwitchPopupVisible(i);
       onChangeStatusAllBtnStart("start");
     },
