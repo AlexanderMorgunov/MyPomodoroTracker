@@ -13,3 +13,7 @@ SPA приложение на нативном JS.
 ## Деплой:
 ## https://alexandermorgunov.github.io/MyPomodoroTracker/
 
+# Стек:
+### HTML
+### CSS
+### JS ES6
