@@ -15,8 +15,6 @@ const Popup = (
   i,
   item = null
 ) => {
-  console.log(item);
-
   function formProcessing(e) {
     e.preventDefault();
     onSwitchPopupVisible(i);
@@ -46,9 +44,7 @@ const Popup = (
     if (!item) {
       onAddTask({ ...newTAsk, id });
       onChangeCurrentTask(id);
-      console.log(newTAsk);
     } else {
-      console.log(newTAsk);
       onChangeTask({ ...newTAsk, id: item.id });
     }
   }

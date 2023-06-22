@@ -1,21 +1,14 @@
 import { createElement } from "../../utils.js";
 
-// PomodoroAllCount
-// PomodoroDoneCount
-// PomodoroCurrent
-
 const Task = (
   item,
   { onChangeCurrentTask, onDelete, onSwitchPopupVisible, onSwitchTaskIsDone }
 ) => {
-  // console.log(title);
-
   let {
     id,
     title,
     PomodoroAllCount,
     PomodoroDoneCount,
-    PomodoroCurrent,
     isCurrent,
     isDone = false,
   } = item;
@@ -27,7 +20,6 @@ const Task = (
         ? "task-wrapper task-wrapper-active"
         : "task-wrapper",
       onclick: (e) => {
-        console.log(e.target.className);
         if (
           e.target.className !== "gg-trash" &&
           e.target.className !== "task-checkMark"
