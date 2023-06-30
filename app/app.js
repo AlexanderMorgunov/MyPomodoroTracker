@@ -13,8 +13,7 @@ export function App({ store }) {
 
     onChangeActiveTimer: (id, status) => store.onChangeActiveTimer(id, status),
     onStartTimer: (id) => store.onStartTimer(id),
-    OnGetTime: (id, activeTimer, interval) =>
-      store.OnGetTime(id, activeTimer, interval),
+    OnGetTime: (id) => store.OnGetTime(id),
     onSwitchPopupVisible: (i) => store.onSwitchPopupVisible(i),
     onAddTask: (title, PomodoroAllCount, PomodoroTimer) =>
       store.onAddTask(title, PomodoroAllCount, PomodoroTimer),

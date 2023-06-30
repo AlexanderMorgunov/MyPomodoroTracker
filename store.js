@@ -1,4 +1,5 @@
 import { getId, getTimer, onPauseAllTimer } from "./utils.js";
+// import { getId, getTimer } from "./utils.js";
 
 export const initialItem = {
   id: getId(),
@@ -13,6 +14,7 @@ export const initialItem = {
   PomodoroTimer: "25:00",
   ShortBreakTimer: "05:00",
   LongBreakTimer: "15:00",
+  // interval: 1,
   PomodoroTimerInterval: null,
   ShortBreakTimerInterval: null,
   LongBreakTimerInterval: null,
@@ -142,9 +144,7 @@ class Store {
     });
   };
 
-  OnGetTime = async (id, activeTimer, OldInterval) => {
-    OldInterval ? clearInterval(OldInterval) : null;
-
+  OnGetTime = async (id) => {
     let interval = setInterval(() => {
       let time = Number(getTimer()) - 1;
       let minutes = Math.floor(time / 60 / 100);
@@ -156,33 +156,32 @@ class Store {
         list: [
           ...this.state.list.map((item) => {
             if (item.id === id) {
-              if (activeTimer === "Pomodoro") {
-                return {
-                  ...item,
-                  PomodoroTimer: `${minutes}:${seconds}`,
-                  PomodoroTimerInterval: interval,
-                };
-              } else if (activeTimer === "ShortBreak") {
-                return {
-                  ...item,
-                  ShortBreakTimer: `${minutes}:${seconds}`,
-                  ShortBreakTimerInterval: interval,
-                };
-              } else if (activeTimer === "LongBreak") {
-                return {
-                  ...item,
-                  LongBreakTimer: `${minutes}:${seconds}`,
-                  LongBreakTimerInterval: interval,
-                };
-              } else throw new Error(`wrong timer name - ${activeTimer}`);
+              return {
+                ...item,
+                [item.activeTimer + "Timer"]: `${minutes}:${seconds}`,
+              };
             } else {
               return item;
             }
           }),
         ],
       });
-      // }
     }, 1000);
+    this.setState({
+      ...this.getState(),
+      list: [
+        ...this.state.list.map((item) => {
+          if (item.id === id) {
+            return {
+              ...item,
+              [item.activeTimer + "TimerInterval"]: interval,
+            };
+          } else {
+            return item;
+          }
+        }),
+      ],
+    });
   };
 
   onSwitchPopupVisible(i) {
