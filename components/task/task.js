@@ -4,14 +4,8 @@ const Task = (
   item,
   { onChangeCurrentTask, onDelete, onSwitchPopupVisible, onSwitchTaskIsDone }
 ) => {
-  let {
-    id,
-    title,
-    PomodoroAllCount,
-    PomodoroDoneCount,
-    isCurrent,
-    isDone = false,
-  } = item;
+  let { id, title, PomodoroAllCount, PomodoroDoneCount, isCurrent, isDone } =
+    item;
 
   return createElement(
     "div",

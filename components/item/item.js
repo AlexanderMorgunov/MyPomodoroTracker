@@ -21,7 +21,7 @@ const Item = (item, callbacks) => {
     PomodoroTimerInterval,
     ShortBreakTimerInterval,
     LongBreakTimerInterval,
-    isDone = false,
+    isDone,
   } = item;
 
   const interval = {
@@ -83,13 +83,11 @@ const Item = (item, callbacks) => {
           clearInterval(interval);
           if (statusBtnStart === "start") {
             callbacks.OnGetTime(id);
-          } else {
-            onPauseTimer(interval);
           }
         },
         disabled: isDone,
       }),
-      activeTask(title, PomodoroCurrent)
+      activeTask(title, PomodoroCurrent, isDone)
     )
   );
 };

@@ -80,6 +80,8 @@
   width: 200px;
   background-color: white;
   transition: color 0.5s ease-in-out 0s;
+  position: relative;
+  z-index: 10;
 }
 .Item-timer-btn-Pomodoro {
   color: var(--PomodoroColor);

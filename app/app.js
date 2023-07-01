@@ -1,12 +1,21 @@
 import { createElement } from "../utils.js";
+import {
+  getCurrentActiveTimer,
+  getCurrentElement,
+  getStatusActiveTimer,
+  GetEditeObject,
+  getCurrentInterval,
+} from "../utils.js";
 import Item from "../components/item/item.js";
 import Task from "../components/task/task.js";
 import Popup from "../components/popup/popup.js";
 import PopupSwitcher from "../components/PopupSwitcher/PopupSwitcher.js";
-import { getCurrentActiveTimer, getCurrentElement } from "../utils.js";
+import clearOrNextPomodoro from "../components/clearOrNextPomodoro/clearOrNextPomodoro.js";
 
 export function App({ store }) {
   const list = store.getState().list;
+
+  // console.log(list);
 
   const callbacks = {
     onChangeStatusBtnStart: () => store.onChangeStatusBtnStart(),
@@ -23,6 +32,7 @@ export function App({ store }) {
       store.onChangeStatusAllBtnStart(status),
     onChangeTask: (item) => store.onChangeTask(item),
     onSwitchTaskIsDone: () => store.onSwitchTaskIsDone(),
+    onResetTimer: () => store.onResetTimer(),
   };
 
   const GetitemCurrentElement = () => {
@@ -46,6 +56,29 @@ export function App({ store }) {
       "div",
       { className: "PopupSwitcher-wrapper" },
       PopupSwitcher(callbacks, 0)
+    ),
+    //
+    createElement(
+      "div",
+      { className: "clearOrNextPomodoro-container" },
+      clearOrNextPomodoro({
+        className: "clearOrNextPomodoro-clear",
+        clearOrNextPomodoroFunc: () => {
+          clearInterval(getCurrentInterval());
+          callbacks.onChangeStatusAllBtnStart("start");
+          callbacks.onResetTimer();
+        },
+        isVisible: getStatusActiveTimer() == "pause",
+      }),
+      clearOrNextPomodoro({
+        className: "clearOrNextPomodoro-next",
+        clearOrNextPomodoroFunc: () => {
+          clearInterval(getCurrentInterval());
+          callbacks.onChangeStatusAllBtnStart("start");
+          callbacks.onChangeTask(GetEditeObject());
+        },
+        isVisible: getStatusActiveTimer() == "pause",
+      })
     ),
     createElement(
       "div",

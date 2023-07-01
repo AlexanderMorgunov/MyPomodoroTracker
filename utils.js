@@ -84,9 +84,9 @@ export function GetEditeObject() {
     PomodoroAllCount,
     PomodoroDoneCount,
     PomodoroCurrent,
-    customPomodoroTimer = null,
-    customShortBreakTimer = null,
-    customLongBreakTimer = null,
+    customPomodoroTimer,
+    customShortBreakTimer,
+    customLongBreakTimer,
   } = item;
 
   let editeObj = {
@@ -139,4 +139,12 @@ export function GetEditeObject() {
       break;
   }
   return editeObj;
+}
+
+export function getStatusActiveTimer() {
+  return getCurrentElement()["statusBtn" + getCurrentActiveTimer()];
+}
+
+export function getCurrentInterval() {
+  return getCurrentElement()[getCurrentActiveTimer() + "TimerInterval"];
 }
