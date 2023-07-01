@@ -11,12 +11,16 @@ export const initialItem = {
   PomodoroDoneCount: 0,
   PomodoroCurrent: 1,
   PomodoroTimer: "25:00",
+  customPomodoroTimer: null,
   ShortBreakTimer: "05:00",
+  customShortBreakTimer: null,
   LongBreakTimer: "15:00",
+  customLongBreakTimer: null,
   PomodoroTimerInterval: null,
   ShortBreakTimerInterval: null,
   LongBreakTimerInterval: null,
   isCurrent: false,
+  isDone: false,
 };
 
 class Store {
@@ -41,14 +45,17 @@ class Store {
     for (const listener of this.listeners) listener();
   }
 
-  onAddTask = ({
+  onAddTask({
     title = "Тестовая задача",
     PomodoroAllCount = 1,
     PomodoroTimer = "25:00",
     ShortBreakTimer = "05:00",
     LongBreakTimer = "15:00",
+    customPomodoroTimer,
+    customShortBreakTimer,
+    customLongBreakTimer,
     id = 1,
-  }) => {
+  }) {
     this.setState({
       ...this.getState(),
       list: [
@@ -61,10 +68,13 @@ class Store {
           PomodoroTimer,
           ShortBreakTimer,
           LongBreakTimer,
+          customPomodoroTimer,
+          customShortBreakTimer,
+          customLongBreakTimer,
         },
       ],
     });
-  };
+  }
 
   onChangeTask(item) {
     this.setState({
@@ -142,9 +152,7 @@ class Store {
     });
   };
 
-  OnGetTime = async (id, activeTimer, OldInterval) => {
-    OldInterval ? clearInterval(OldInterval) : null;
-
+  OnGetTime = async (id) => {
     let interval = setInterval(() => {
       let time = Number(getTimer()) - 1;
       let minutes = Math.floor(time / 60 / 100);
@@ -156,34 +164,53 @@ class Store {
         list: [
           ...this.state.list.map((item) => {
             if (item.id === id) {
-              if (activeTimer === "Pomodoro") {
-                return {
-                  ...item,
-                  PomodoroTimer: `${minutes}:${seconds}`,
-                  PomodoroTimerInterval: interval,
-                };
-              } else if (activeTimer === "ShortBreak") {
-                return {
-                  ...item,
-                  ShortBreakTimer: `${minutes}:${seconds}`,
-                  ShortBreakTimerInterval: interval,
-                };
-              } else if (activeTimer === "LongBreak") {
-                return {
-                  ...item,
-                  LongBreakTimer: `${minutes}:${seconds}`,
-                  LongBreakTimerInterval: interval,
-                };
-              } else throw new Error(`wrong timer name - ${activeTimer}`);
+              return {
+                ...item,
+                [item.activeTimer + "Timer"]: `${minutes}:${seconds}`,
+              };
             } else {
               return item;
             }
           }),
         ],
       });
-      // }
     }, 1000);
+    this.setState({
+      ...this.getState(),
+      list: [
+        ...this.state.list.map((item) => {
+          if (item.id === id) {
+            return {
+              ...item,
+              [item.activeTimer + "TimerInterval"]: interval,
+            };
+          } else {
+            return item;
+          }
+        }),
+      ],
+    });
   };
+
+  onResetTimer() {
+    this.setState({
+      ...this.getState(),
+      list: [
+        ...this.state.list.map((item) => {
+          if (item.isCurrent) {
+            return {
+              ...item,
+              PomodoroTimer: item.customPomodoroTimer || "25:00",
+              ShortBreakTimer: item.customShortBreakTimer || "05:00",
+              LongBreakTimer: item.customLongBreakTimer || "15:00",
+            };
+          } else {
+            return item;
+          }
+        }),
+      ],
+    });
+  }
 
   onSwitchPopupVisible(i) {
     this.setState({
@@ -204,13 +231,21 @@ class Store {
       list: [
         ...this.state.list.map((item) => {
           if (item.isCurrent) {
+            const count = {
+              true: 0,
+              false: item.PomodoroAllCount,
+            }[item.isDone];
+
+            const current = {
+              true: 1,
+              false: item.PomodoroAllCount,
+            }[item.isDone];
+
             return {
               ...item,
+              PomodoroDoneCount: count,
+              PomodoroCurrent: current,
               isDone: !item.isDone,
-              PomodoroDoneCount:
-                item.PomodoroDoneCount === item.PomodoroAllCount
-                  ? 0
-                  : item.PomodoroAllCount,
             };
           } else {
             return item;

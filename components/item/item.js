@@ -21,22 +21,20 @@ const Item = (item, callbacks) => {
     PomodoroTimerInterval,
     ShortBreakTimerInterval,
     LongBreakTimerInterval,
-    isDone = false,
+    isDone,
   } = item;
 
-  const interval =
-    activeTimer == "Pomodoro"
-      ? PomodoroTimerInterval
-      : activeTimer == "ShortBreak"
-      ? ShortBreakTimerInterval
-      : LongBreakTimerInterval;
+  const interval = {
+    Pomodoro: PomodoroTimerInterval,
+    ShortBreak: ShortBreakTimerInterval,
+    LongBreak: LongBreakTimerInterval,
+  }[activeTimer];
 
-  const statusBtnStart =
-    activeTimer == "Pomodoro"
-      ? statusBtnPomodoro
-      : activeTimer == "ShortBreak"
-      ? statusBtnShortBreak
-      : statusBtnLongBreak;
+  const statusBtnStart = {
+    Pomodoro: statusBtnPomodoro,
+    ShortBreak: statusBtnShortBreak,
+    LongBreak: statusBtnLongBreak,
+  }[activeTimer];
 
   if (item[`${getCurrentActiveTimer()}Timer`] === "00:00") {
     clearInterval(interval);
@@ -63,37 +61,33 @@ const Item = (item, callbacks) => {
             textContent: item,
             onclick: () => {
               callbacks.onChangeActiveTimer(id, item);
+              callbacks.onChangeStatusAllBtnStart("start");
               onPauseTimer(interval);
-              statusBtnStart === "pause"
-                ? callbacks.onChangeStatusAllBtnStart("start")
-                : null;
             },
           })
         )
       ),
       createElement("div", {
         className: "Item-timer",
-        textContent:
-          activeTimer == "Pomodoro"
-            ? PomodoroTimer
-            : activeTimer == "ShortBreak"
-            ? ShortBreakTimer
-            : LongBreakTimer,
+        textContent: {
+          Pomodoro: PomodoroTimer,
+          ShortBreak: ShortBreakTimer,
+          LongBreak: LongBreakTimer,
+        }[activeTimer],
       }),
       createElement("button", {
         className: `Item-timer-btn Item-timer-btn-${activeTimer}`,
         textContent: statusBtnStart,
         onclick: () => {
           callbacks.onChangeStatusBtnStart();
+          clearInterval(interval);
           if (statusBtnStart === "start") {
-            callbacks.OnGetTime(id, activeTimer, interval);
-          } else {
-            onPauseTimer(interval);
+            callbacks.OnGetTime(id);
           }
         },
         disabled: isDone,
       }),
-      activeTask(title, PomodoroCurrent)
+      activeTask(title, PomodoroCurrent, isDone)
     )
   );
 };

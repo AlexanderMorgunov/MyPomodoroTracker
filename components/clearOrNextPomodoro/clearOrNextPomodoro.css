@@ -1,0 +1,37 @@
+.clearOrNextPomodoro-container {
+  width: 350px;
+  position: relative;
+  bottom: 170px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.clearOrNextPomodoro {
+  z-index: 10;
+  cursor: pointer;
+}
+
+.clearOrNextPomodoro-next {
+  width: 0;
+  height: 0;
+  border: 0 solid transparent;
+  border-bottom-width: 10px;
+  border-top-width: 10px;
+  border-left: 20px solid var(--GrayColor);
+}
+.clearOrNextPomodoro-clear {
+  width: 20px;
+  height: 20px;
+  width: 20px;
+  height: 20px;
+  /* border-radius: 3px; */
+  background-color: var(--GrayColor);
+  /* background-color: var(--PomodoroColor); */
+}
+.clearOrNextPomodoro:hover {
+  transition: all 0.3s;
+  transform: scale(1.2);
+}
+/* .clearOrNextPomodoro-clear::after {
+  content: "||";
+} */

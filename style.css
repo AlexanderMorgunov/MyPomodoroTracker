@@ -6,6 +6,7 @@
 @import url("./components/PopupSwitcher/PopupSwitcher.css");
 @import url("./components/incDecBtns/incDecBtns.css");
 @import url("./components/activeTask/activeTask.css");
+@import url("./components//clearOrNextPomodoro/clearOrNextPomodoro.css");
 * {
   margin: 0;
   padding: 0;
